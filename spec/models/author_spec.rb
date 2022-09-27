@@ -14,4 +14,9 @@ RSpec.describe Author, type: :model do
   it 'is not valid without last name' do
     expect(described_class.new(first_name: 'Thomas')).not_to be_valid
   end
+
+  describe 'Associations' do
+    it { is_expected.to have_many(:book_authors).without_validating_presence }
+    it { is_expected.to have_many(:books).without_validating_presence }
+  end
 end
