@@ -29,3 +29,6 @@ AllCops:
     - 'Gemfile'
 
   NewCops: enable
+
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
