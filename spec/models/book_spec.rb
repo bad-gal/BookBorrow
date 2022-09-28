@@ -6,6 +6,7 @@ RSpec.describe Book, type: :model do
   let(:user) { create(:user) }
   let(:category) { create(:category) }
   let(:author) { create(:author) }
+  let(:book) { create(:book) }
 
   it 'is valid with valid attributes' do
     expect(described_class.new(
@@ -29,6 +30,15 @@ RSpec.describe Book, type: :model do
     expect(described_class.new(
              title: 'The Rails 5 Way', user_id: user.id
            )).not_to be_valid
+  end
+
+  it 'can attach a book_cover' do
+    book.book_cover.attach(
+      io: Rails.root.join('spec/fixtures/files/empty.jpeg').open,
+      filename: 'empty.jpeg', content_type: 'image/jpeg'
+    )
+
+    expect(book.book_cover).to be_attached
   end
 
   describe 'Associations' do
