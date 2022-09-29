@@ -1,13 +1,6 @@
 require 'faker'
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
 
-# Create 10 users
+puts "Create 10 users"
 10.times do
   User.create(
     first_name: Faker::Name.first_name,
@@ -17,7 +10,7 @@ require 'faker'
   )
 end
 
-# Create Categories
+puts "Create Categories"
 categories = [
   'Fairy tale', 'Fable', 'Fiction in verse',
   'Science', 'Computing', 'Fiction narrative',
@@ -28,7 +21,7 @@ categories.each do |genre|
   Category.create(topic: genre)
 end
 
-# Create Authors
+puts "Create Authors"
 25.times do
   Author.create(
     first_name: Faker::Name.first_name,
@@ -36,7 +29,7 @@ end
   )
 end
 
-# Create Books
+puts "Create Books"
 15.times do
   Book.create(
     title: Faker::Book.title,
@@ -46,7 +39,14 @@ end
   )
 end
 
-# Create join for Books and Authors
+puts "Add book cover images"
+Book.all.each_with_index do |book, index|
+  book.book_cover.attach(io: Rails.root.join("spec/fixtures/files/#{index + 1}.png").open,
+                         filename: "#{index + 1}.png",
+                         content_type: 'image/png')
+end
+
+puts "Create join for Books and Authors"
 Book.all.each do |book|
   counter = [1,2,3,4].sample
   author_sample = Author.all.sample(counter)
@@ -59,8 +59,7 @@ Book.all.each do |book|
   end
 end
 
-# Create Loans
-# books on loan
+puts "Create Loans"
 Loan.create(
   loan_date: Faker::Time.backward(days: 10),
   return_by: 30.days.from_now,
