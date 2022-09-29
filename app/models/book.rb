@@ -4,7 +4,10 @@ class Book < ApplicationRecord
   belongs_to :user
   belongs_to :category
 
-  has_one_attached :book_cover
+  has_one_attached :book_cover do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100]
+  end
+
   has_many :book_authors, dependent: :destroy
   has_many :authors, through: :book_authors
 
