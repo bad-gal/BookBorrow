@@ -73,6 +73,7 @@ Loan.create(
   loan_date: 30.days.ago,
   return_by: 2.days.from_now,
   status: 'returned',
+  returned_on: 5.days.ago,
   user_id: User.all.sample.id,
   book_id: Book.first.id
 )
