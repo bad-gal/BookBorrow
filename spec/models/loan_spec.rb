@@ -30,4 +30,11 @@ RSpec.describe Loan, type: :model do
     it { is_expected.to belong_to(:user).without_validating_presence }
     it { is_expected.to belong_to(:book).without_validating_presence }
   end
+
+  describe '.books_not_returned' do
+    it 'includes book ids that have a returned_on date of nil' do
+      create(:loan, book_id: book.id, returned_on: nil)
+      expect(described_class.books_not_returned).to eq [book.id]
+    end
+  end
 end
