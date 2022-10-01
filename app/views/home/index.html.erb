@@ -1,8 +1,22 @@
 <h1>Home Page</h1>
 
-<!--featured books-->
+<h3>Featured Books</h3>
+<table>
+  <tbody>
+    <tr>
+      <% @featured.each do |book| %>
+        <td>
+          <% if book.book_cover.attached? %>
+            <%= image_tag book.book_cover.variant(:thumb) %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+<br>
 
-
+<h3>Available Books</h3>
 <table>
   <thead>
     <th>Image</th>
