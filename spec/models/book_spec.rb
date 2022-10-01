@@ -47,4 +47,19 @@ RSpec.describe Book, type: :model do
     it { is_expected.to have_many(:book_authors).without_validating_presence }
     it { is_expected.to have_many(:authors).without_validating_presence }
   end
+
+  describe '.available' do
+    it 'includes books that are available to loan' do
+      book = create(:book)
+      loan = create(:loan, book_id: book.id)
+      expect(described_class.available.first.id).to eq loan.book_id
+    end
+  end
+
+  describe '.featured' do
+    it 'includes an array of 4 sample books' do
+      create_list(:book, 5)
+      expect(described_class.featured.size).to eq 4
+    end
+  end
 end

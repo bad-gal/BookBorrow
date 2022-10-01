@@ -12,4 +12,7 @@ class Book < ApplicationRecord
   has_many :authors, through: :book_authors
 
   validates :title, presence: true
+
+  scope :available, -> { where.not(id: Loan.books_not_returned) }
+  scope :featured, -> { available.sample(4) }
 end
