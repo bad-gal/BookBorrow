@@ -1,0 +1,26 @@
+<h2><%= @book.title %></h2>
+
+<table>
+  <thead>
+  <th>Image</th>
+  <th>Description</th>
+  <th>Category</th>
+  <th>Book Owner</th>
+  <th>Available to loan?</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <% if @book.book_cover.attached? %>
+          <%= image_tag @book.book_cover.variant(:thumb) %>
+        <% end %>
+      </td>
+      <td><%= @book.description %></td>
+      <td><%= @book.category.topic %></td>
+      <td><%= @book.user.first_name%> <%= @book.user.last_name%></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to 'Book Dashboard', books_path %>
+<%= link_to 'Homepage', root_path %>
