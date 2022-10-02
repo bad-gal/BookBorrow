@@ -34,6 +34,7 @@ puts "Create Books"
   Book.create(
     title: Faker::Book.title,
     publish_date: Faker::Time.backward(days: 500),
+    description: Faker::Lorem.paragraphs,
     user_id: User.all.sample.id,
     category_id: Category.all.sample.id
   )
