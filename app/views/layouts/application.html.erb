@@ -12,9 +12,45 @@
   </head>
 
   <body>
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, class: name %>
-    <% end %>
+
+    <!--    NAVIGATION -->
+
+    <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+      <div class="flex items-center flex-shrink-0 text-white mr-6">
+        <img src="icons8-storytelling-50.png" alt="book icon" class="book_icon pr-2"/>
+        <span class="font-semibold text-xl tracking-tight hover:text-yellow-100">
+            <%= link_to t('title'), root_path %>
+          </span>
+      </div>
+      <div class="block md:hidden">
+        <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+          <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+        </button>
+        <div class="w-full block flex-grow-0 md:flex md:items-right md:w-auto">
+          <div class="hidden md:block">
+            <%= link_to 'Books', books_path, class:"block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-100 mr-4" %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!--    FLASH NOTICES-->
+    <div class="w-full p-6 text-center">
+      <div class="container mx-auto">
+        <% unless notice.blank? %>
+          <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <span class="block sm:inline"><%= notice %></span>
+          </div>
+        <% end %>
+
+        <% unless alert.blank? %>
+          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <span class="block sm:inline"><%= alert %></span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
     <%= yield %>
   </body>
 </html>
