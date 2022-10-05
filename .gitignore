@@ -76,9 +76,8 @@ storage/*
 .DS_Store
 
 # Ignore asset builds
-app/assets/builds/*
+app/assets/builds/
 app/assets/builds/.keep
-
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
