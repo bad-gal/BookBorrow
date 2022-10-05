@@ -3,6 +3,7 @@
   <head>
     <title><%= t('title') %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
@@ -14,22 +15,38 @@
   <body>
 
     <!--    NAVIGATION -->
-
-    <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+    <nav class="flex items-center justify-between flex-wrap bg-purple-500 p-6">
       <div class="flex items-center flex-shrink-0 text-white mr-6">
         <img src="icons8-storytelling-50.png" alt="book icon" class="book_icon pr-2"/>
         <span class="font-semibold text-xl tracking-tight hover:text-yellow-100">
             <%= link_to t('title'), root_path %>
           </span>
       </div>
+
       <div class="block md:hidden">
-        <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
-          <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+        <!--   Mobile Menu button-->
+        <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white mobile-menu-button">
+          <svg
+            class="fill-current h-3 w-3"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+          </svg>
         </button>
-        <div class="w-full block flex-grow-0 md:flex md:items-right md:w-auto">
-          <div class="hidden md:block">
-            <%= link_to 'Books', books_path, class:"block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-100 mr-4" %>
-          </div>
+
+        <div class="hidden mobile-menu">
+          <ul class="">
+            <li class="active"><a href="#{root_path}" class="block text-sm px-2 py-4 text-white bg-purple-500 font-semibold">Home</a></li>
+            <li><a href="#{books_path}" class="block text-sm px-2 py-4 hover:bg-purple-200 transition duration-300">Books</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!--   Menu on desktops and tablets-->
+      <div class="w-full block flex-grow-0 md:flex md:items-right md:w-auto">
+        <div class="hidden md:block">
+          <%= link_to 'Books', books_path, class:"block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-100 mr-4" %>
         </div>
       </div>
     </nav>
@@ -51,6 +68,10 @@
       </div>
     </div>
 
-    <%= yield %>
+    <!--    BODY-->
+    <div class="container mx-auto">
+      <%= yield %>
+    </div>
+
   </body>
 </html>
