@@ -1,19 +1,60 @@
-<h1>Home Page</h1>
+<div>
+  <div class="block flex flex-col md:flex-row bg-gradient-to-r from-orange-400 via-pink-400 to-purple-500 rounded-lg px-4 pt-8 pb-6 md:py-12 md:px-16 mx-4 md:mx-24">
+    <div class="md:flex-1">
+      <img src="reading-1427324_640.jpg" alt="reading books" class="rounded-full ">
+    </div>
+    <div class="flex-1 m-auto md:pl-24">
+      <ul class="text-yellow-200 text-lg leading-loose">
+        <li class="flex pb-2  pt-4 md:pt-0">
+          <i class="p-2 pb-4 material-icons font-bold">check</i>
+          Do you own books you've already read?
+        </li>
+        <li class="flex pb-2">
+          <i class="p-2 pb-4 material-icons font-bold">check</i>
+          Want to share the knowledge gained from these books with others?
+        </li>
+        <li class="flex pb-2">
+          <i class="p-2 pb-4 material-icons font-bold">check</i>
+          Loan your books to colleagues for a short time
+        </li>
+        <li class="flex pb-2">
+          <i class="p-2 pb-4 material-icons font-bold">check</i>
+          Save your colleagues money
+        </li>
+        <li class="flex">
+          <i class="p-2 pb-4 material-icons font-bold">check</i>
+          Help the environment
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 
-<h3>Featured Books</h3>
-<table>
-  <tbody>
-    <tr>
-      <% @featured.each do |book| %>
-        <td>
-          <% if book.book_cover.attached? %>
-            <%= image_tag book.book_cover.variant(:thumb) %>
-          <% end %>
-        </td>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
+<div class="grid grid-cols-2 gap-4 md:mt-12 text-2xl">
+  <div class="border-solid border-4 border-light-blue-500 md:p-8 md:mt-8 md:mx-28 text-center">
+    Register a book to loan out
+    <%= button_to 'Register book', '#', class: "bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 border border-purple-700 rounded mt-4" %>
+  </div>
+  <div class="border-solid border-4 border-light-blue-500 md:p-8 md:mt-8 md:mx-28 text-center">
+    See a list of books available to borrow
+    <%= button_to 'Explore books', books_path, method: 'get', class: "bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 border border-purple-700 rounded mt-4" %>
+  </div>
+</div>
+
+<div class="pt-12">
+  <h3>Featured Books</h3>
+  <table>
+    <tbody>
+      <tr>
+        <% @featured.each do |book| %>
+          <td>
+            <% if book.book_cover.attached? %>
+              <%= image_tag book.book_cover %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>
 <br>
-
-<%= link_to 'Available Books', books_path %>
