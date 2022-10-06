@@ -14,5 +14,5 @@ class Book < ApplicationRecord
   validates :title, presence: true
 
   scope :available, -> { where.not(id: Loan.books_not_returned) }
-  scope :featured, -> { available.sample(4) }
+  scope :featured, ->(amount) { available.sample(amount) }
 end

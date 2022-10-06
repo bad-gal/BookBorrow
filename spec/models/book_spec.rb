@@ -59,7 +59,7 @@ RSpec.describe Book, type: :model do
   describe '.featured' do
     it 'includes an array of 4 sample books' do
       create_list(:book, 5)
-      expect(described_class.featured.size).to eq 4
+      expect(described_class.featured(3).size).to eq 3
     end
   end
 end
