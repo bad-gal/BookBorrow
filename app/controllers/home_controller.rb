@@ -2,6 +2,6 @@
 
 class HomeController < ApplicationController
   def index
-    @featured = Book.featured
+    @featured = Book.featured(5)
   end
 end
