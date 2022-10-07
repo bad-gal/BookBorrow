@@ -1,9 +1,9 @@
 <div>
-  <div class="block flex flex-col md:flex-row bg-gradient-to-r from-orange-400 via-pink-400 to-purple-500 rounded-lg px-4 pt-8 pb-6 md:py-12 md:px-16 mx-4 md:mx-24">
-    <div class="md:flex-1">
+  <div class="block flex flex-col lg:flex-row bg-gradient-to-r from-orange-400 via-pink-400 to-purple-500 rounded-lg px-4 pt-8 pb-6 lg:py-12 lg:px-16 mx-4">
+    <div class="pb-2 lg:pb-0 lg:flex-1">
       <img src="reading-1427324_640.jpg" alt="reading books" class="rounded-full ">
     </div>
-    <div class="flex-1 m-auto md:pl-24">
+    <div class="flex-1 m-auto md:pl-12">
       <ul class="text-yellow-200 text-lg leading-loose">
         <li class="flex pb-2  pt-4 md:pt-0">
           <i class="p-2 pb-4 material-icons font-bold">check</i>
@@ -30,31 +30,27 @@
   </div>
 </div>
 
-<div class="grid grid-cols-2 gap-4 md:mt-12 text-2xl">
-  <div class="border-solid border-4 border-light-blue-500 md:p-8 md:mt-8 md:mx-28 text-center">
-    Register a book to loan out
-    <%= button_to 'Register book', '#', class: "bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 border border-purple-700 rounded mt-4" %>
+<div class="grid grid-rows-2 md:grid-rows-1 md:grid-cols-2 gap-2 md:gap-4 text-lg pt-4 lg:mt-4 lg:text-2xl">
+  <div class="border-solid border-4 border-purple-300 rounded-lg pt-2 mx-4 mt-4 md:p-4 lg:mt-6 lg:mx-12 text-center text-gray-500">
+    Share your book with others
+    <%= button_to 'Register book', '#', class: "bg-purple-500 hover:bg-purple-700 text-white font-bold p-2 mb-4 md:py-2 md:px-4 border border-purple-700 rounded mt-4 md:mb-0" %>
   </div>
-  <div class="border-solid border-4 border-light-blue-500 md:p-8 md:mt-8 md:mx-28 text-center">
-    See a list of books available to borrow
-    <%= button_to 'Explore books', books_path, method: 'get', class: "bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 border border-purple-700 rounded mt-4" %>
+  <div class="border-solid border-4 border-purple-300 rounded-lg pt-2 mx-4 mt-4 md:p-4 lg:mt-6 lg:mx-12 text-center text-gray-500">
+    View books available to borrow
+    <%= button_to 'Explore books', books_path, method: 'get', class: "bg-purple-500 hover:bg-purple-700 text-white font-bold p-2 mb-4 md:py-2 md:px-4 border border-purple-700 rounded mt-4 md:mb-0" %>
   </div>
 </div>
 
-<div class="pt-12">
-  <h3>Featured Books</h3>
-  <table>
-    <tbody>
-      <tr>
-        <% @featured.each do |book| %>
-          <td>
-            <% if book.book_cover.attached? %>
-              <%= image_tag book.book_cover %>
-            <% end %>
-          </td>
+<div class="py-4 px-3">
+  <h3 class="ml-4 text-lg text-gray-500">Featured Books</h3>
+  <div class="flex flex-row flex-nowrap overflow-x-auto md:justify-start">
+    <% @featured.each do |book| %>
+      <div class="px-2 flex-shrink-0 md:flex-shrink-1">
+        <% if book.book_cover.attached? %>
+          <%= image_tag book.book_cover, class: "book_img_resize" %>
         <% end %>
-      </tr>
-    </tbody>
-  </table>
+      </div>
+    <% end %>
+  </div>
 </div>
 <br>
