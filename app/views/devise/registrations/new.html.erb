@@ -1,11 +1,21 @@
-<h2>Sign up</h2>
+<h2 class="pb-4 text-2xl">Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autocomplete: "email" %>
   </div>
 
   <div class="field">
@@ -21,8 +31,13 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="field">
+    <%= f.label :location %><br />
+    <%= f.text_field :location %>
+  </div>
+
+  <div class="group my-8 box-border border-blue-700 h-12 w-32 border-4 rounded-lg align-middle text-center bg-blue-400 text-white font-bold hover:shadow-lg hover:bg-blue-600 hover:border-indigo-500 actions">
+    <%= f.submit "Sign up", class: "pt-2" %>
   </div>
 <% end %>
 
