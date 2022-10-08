@@ -5,6 +5,7 @@ FactoryBot.define do
     first_name { 'Cary' }
     last_name { 'Grant' }
     email { 'cg@example.com' }
+    password { 'pa5sw03d' }
     location { 'UK office' }
   end
 
@@ -12,6 +13,7 @@ FactoryBot.define do
     first_name { 'Jane' }
     last_name { 'Russell' }
     email { 'jane_r@example.com' }
+    password { 'pa5sw03d' }
     location { 'US office' }
   end
 end
