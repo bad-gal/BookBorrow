@@ -47,7 +47,7 @@
     <% @featured.each do |book| %>
       <div class="px-2 flex-shrink-0 md:flex-shrink-1">
         <% if book.book_cover.attached? %>
-          <%= image_tag book.book_cover, class: "book_img_resize" %>
+          <%= link_to image_tag(book.book_cover, class: "book_img_resize"), book_path(book.id) %>
         <% end %>
       </div>
     <% end %>
