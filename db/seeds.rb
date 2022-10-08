@@ -6,6 +6,7 @@ puts "Create 10 users"
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.safe_email,
+    password: 'pa5sw03d',
     location: ['US', 'UK', ''].sample
   )
 end
