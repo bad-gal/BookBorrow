@@ -50,15 +50,14 @@ RSpec.describe Book, type: :model do
 
   describe '.available' do
     it 'includes books that are available to loan' do
-      book = create(:book)
-      loan = create(:loan, book_id: book.id)
+      loan = create(:loan, book_id: book.id, user_id: book.user_id)
       expect(described_class.available.first.id).to eq loan.book_id
     end
   end
 
   describe '.featured' do
     it 'includes an array of 4 sample books' do
-      create_list(:book, 5)
+      create_list(:book, 5, user_id: user.id)
       expect(described_class.featured(3).size).to eq 3
     end
   end

@@ -23,8 +23,8 @@
           </span>
       </div>
 
+      <!--   Mobile Menu button-->
       <div class="block md:hidden">
-        <!--   Mobile Menu button-->
         <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white mobile-menu-button">
           <svg
             class="fill-current h-3 w-3"
@@ -34,11 +34,16 @@
             <title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
           </svg>
         </button>
-
         <div class="hidden mobile-menu">
           <ul class="">
             <li class="active"><a href="#{root_path}" class="block text-sm px-2 py-4 text-white bg-purple-500 font-semibold">Home</a></li>
             <li><a href="#{books_path}" class="block text-sm px-2 py-4 hover:bg-purple-200 transition duration-300">Books</a></li>
+            <% if user_signed_in? %>
+              <li><%= link_to 'Log out', destroy_user_session_path, data: { "turbo-method": :delete } %></li>
+            <% else %>
+              <li><%= link_to 'Sign up', new_user_registration_path %></li>
+              <li><%= link_to 'Log in', new_user_session_path %></li>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -47,29 +52,35 @@
       <div class="w-full block flex-grow-0 md:flex md:items-right md:w-auto">
         <div class="hidden md:block">
           <%= link_to 'Books', books_path, class:"block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-100 mr-4" %>
+          <% if user_signed_in? %>
+            <%= link_to 'Log out', destroy_user_session_path, data: { "turbo-method": :delete }, class:"block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-100 mr-4" %>
+          <% else %>
+            <%= link_to 'Sign up', new_user_registration_path, class:"block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-100 mr-4" %>
+            <%= link_to 'Log in', new_user_session_path, class:"block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-100 mr-4" %>
+          <% end %>
         </div>
       </div>
     </nav>
 
-    <!--    FLASH NOTICES-->
-    <div class="w-full p-6 text-center">
-      <div class="container mx-auto">
-        <% unless notice.blank? %>
-          <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-            <span class="block sm:inline"><%= notice %></span>
-          </div>
-        <% end %>
-
-        <% unless alert.blank? %>
-          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-            <span class="block sm:inline"><%= alert %></span>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
     <!--    BODY-->
     <div class="container mx-auto">
+      <!--    FLASH NOTICES-->
+      <div class="w-full p-6 text-center">
+        <div class="container mx-auto">
+          <% unless notice.blank? %>
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+              <span class="block sm:inline"><%= notice %></span>
+            </div>
+          <% end %>
+
+          <% unless alert.blank? %>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+              <span class="block sm:inline"><%= alert %></span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
       <%= yield %>
     </div>
 
