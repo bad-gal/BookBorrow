@@ -17,7 +17,7 @@
     <!--    NAVIGATION -->
     <nav class="flex items-center justify-between flex-wrap bg-purple-500 p-6">
       <div class="flex items-center flex-shrink-0 text-white mr-6">
-        <img src="icons8-storytelling-50.png" alt="book icon" class="book_icon pr-2"/>
+        <%= link_to image_tag("icons8-storytelling-50.png", alt: "book icon", class: "book_icon pr-2"), root_path %>
         <span class="font-semibold text-xl tracking-tight hover:text-yellow-100">
             <%= link_to t('title'), root_path %>
           </span>
