@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
+
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
