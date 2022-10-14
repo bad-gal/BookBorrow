@@ -1,0 +1,31 @@
+<div class="books-wrapper grid grid-cols-6 gap-2" data-new-record="<%= f.object.new_record? %>">
+    <div class="col-start-2 col-span-1">
+      <%= f.label :first_name, class: "text-gray-500 font-bold" %>
+    </div>
+
+    <div class="col-start-3 col-span-1">
+      <%= f.label :last_name, class: "text-gray-500 font-bold" %>
+    </div>
+
+    <div class="col-start-2 col-span-1">
+        <%= f.text_field :first_name, class: "appearance-none bg-gray-200 border border-gray-200 text-gray-700 w-full py-3 px-5 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+
+    <div class="col-start-3 col-span-1">
+        <%= f.text_field :last_name, class: "appearance-none bg-gray-200 border border-gray-200 text-gray-700 w-full py-3 px-5 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+
+    <% if local_assigns[:hide_delete] %>
+      <div class="hidden">
+    <%else %>
+      <div class="col-start-4 col-span-1">
+    <% end %>
+        <button type="button"
+                data-action="books#remove"
+                class="delete-button text-white font-bold p-2 rounded-lg box-border border-red-700 border bg-red-400">
+          Bin
+        </button>
+        <%= f.hidden_field :_destroy %>
+    </div>
+  </div>
+</div>
