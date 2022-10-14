@@ -6,13 +6,23 @@
     <div class="col-start-3 col-span-1">
       <%= f.label :last_name, class: "text-gray-500 font-bold" %>
     </div>
-
+    <!--first name textfield-->
     <div class="col-start-2 col-span-1">
-        <%= f.text_field :first_name, class: "appearance-none bg-gray-200 border border-gray-200 text-gray-700 w-full py-3 px-5 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+        <%= f.text_field :first_name, list: "first_names_autocomplete", class: "appearance-none bg-gray-200 border border-gray-200 text-gray-700 w-full py-3 px-5 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+        <datalist id="first_names_autocomplete" class="bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+          <% Author.all.each do |author| %>
+            <option value="<%= author.first_name %>">
+          <% end %>
+        </datalist>
     </div>
-
+    <!--last name textfield-->
     <div class="col-start-3 col-span-1">
-        <%= f.text_field :last_name, class: "appearance-none bg-gray-200 border border-gray-200 text-gray-700 w-full py-3 px-5 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+        <%= f.text_field :last_name, list: "last_names_autocomplete", class: "appearance-none bg-gray-200 border border-gray-200 text-gray-700 w-full py-3 px-5 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+        <datalist id="last_names_autocomplete">
+          <% Author.all.each do |author| %>
+            <option value="<%= author.last_name %>">
+          <% end %>
+        </datalist>
     </div>
 
     <% if local_assigns[:hide_delete] %>
