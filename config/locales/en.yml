@@ -31,5 +31,8 @@
 
 en:
   title: 'Book Borrow'
+  book:
+    create:
+      success: 'Your book was added successfully.'
   errors:
     book_not_found: 'The selected book could not be found'
