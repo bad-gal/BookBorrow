@@ -45,7 +45,7 @@ RSpec.describe 'Books', type: :request do
 
       params = { book: { title: 'My Book',
                          description: 'Book Description',
-                         publish_date: Time.now.utc,
+                         publish_year: 2019,
                          category_id: category.id,
                          user_id: 1,
                          author_id: 2 } }

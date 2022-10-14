@@ -42,7 +42,7 @@ class BooksController < ApplicationController
     params.require(:book)
           .permit(:title,
                   :description,
-                  :publish_date,
+                  :publish_year,
                   :return_by,
                   :returned_on,
                   :user_id,

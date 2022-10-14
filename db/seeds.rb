@@ -34,7 +34,7 @@ puts "Create Books"
 15.times do
   Book.create(
     title: Faker::Book.title,
-    publish_date: Faker::Time.backward(days: 500),
+    publish_year: [1969, 1999, 2022, 1974, 2011, 2019, 2009, 2020, 1984, 1989].sample,
     description: Faker::Lorem.paragraphs,
     user_id: User.all.sample.id,
     category_id: Category.all.sample.id

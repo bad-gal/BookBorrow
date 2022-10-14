@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :book do
     title { 'Hello World' }
-    publish_date { '2022-09-25' }
+    publish_year { '2022' }
     association :user
     association :category
   end
