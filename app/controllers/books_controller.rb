@@ -19,6 +19,14 @@ class BooksController < ApplicationController
     @book.user = current_user
 
     if @book.save
+      # if book_cover is empty then add book_placeholder image
+      unless @book.book_cover.attached?
+        @book.book_cover.attach(
+          io: Rails.root.join('app/assets/images/book_placeholder.gif').open,
+          filename: 'book_placeholder', content_type: 'image/gif'
+        )
+      end
+
       flash[:notice] = t('book.create.success')
       redirect_to book_path(@book)
     else
@@ -48,6 +56,7 @@ class BooksController < ApplicationController
                   :returned_on,
                   :user_id,
                   :category_id,
+                  :book_cover,
                   authors_attributes: %i[id first_name last_name _destroy])
   end
 
