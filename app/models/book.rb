@@ -16,11 +16,4 @@ class Book < ApplicationRecord
 
   scope :available, -> { where.not(id: Loan.books_not_returned) }
   scope :featured, ->(amount) { available.sample(amount) }
-
-  # def authors_attributes=(authors_attributes)
-  #   authors_attributes.each_value do |author_attribute|
-  #     author = Author.find_or_create_by(author_attribute)
-  #     authors << author
-  #   end
-  # end
 end

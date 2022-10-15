@@ -1,26 +1,29 @@
-<h2><%= @book.title %></h2>
+<div class="grid grid-cols-4 gap-2">
+  <h1 class="col-span-full text-4xl mb-12"><%= @book.title %></h1>
+  <div class="row-span-3">
+    <% if @book.book_cover.attached? %>
+      <%= image_tag @book.book_cover %>
+    <% end %>
+  </div>
+  <div class="row-span-1 col-span-3">
+    <p class="text-2xl"><%= @book.description %></p>
+  </div>
+  <div class="col-start-2 col-span-1">
+    <p class="text-lg">Published: <%= @book.publish_year %></p>
+  </div>
+  <div class="col-start-3 col-span-2">
+    <p class="text-lg">Category: <%= @book.category.topic %></p>
+  </div>
+  <div class="col-start-2 col-span-1">
+    <p class="text-lg">Book owner: <%= owner_name(@book.user) %></p>
+  </div>
+  <div class="col-start-3 col-span-2">
+    <p class="text-lg">Authors: <%= author_list(@book.authors) %></p>
+  </div>
 
-<table>
-  <thead>
-  <th>Image</th>
-  <th>Description</th>
-  <th>Category</th>
-  <th>Book Owner</th>
-  <th>Available to loan?</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <% if @book.book_cover.attached? %>
-          <%= image_tag @book.book_cover.variant(:thumb) %>
-        <% end %>
-      </td>
-      <td><%= @book.description %></td>
-      <td><%= @book.category.topic %></td>
-      <td><%= @book.user.first_name%> <%= @book.user.last_name%></td>
-    </tr>
-  </tbody>
-</table>
-
-<%= link_to 'Book Dashboard', books_path %>
-<%= link_to 'Homepage', root_path %>
+  <% if current_user && @is_available %>
+    <div class="btn btn-primary"><%= button_to 'Borrow book', root_path %></div>
+  <% else %>
+    <div><%= @is_available ? 'Book is AVAILABLE' : 'Book is currently unavailable'%></div>
+  <% end %>
+</div>

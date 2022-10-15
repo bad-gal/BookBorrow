@@ -32,6 +32,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    @is_available = Book.available.include?(@book)
   end
 
   def destroy; end

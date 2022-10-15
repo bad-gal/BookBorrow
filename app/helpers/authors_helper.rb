@@ -1,8 +1,14 @@
 # frozen_string_literal: true
 
 module AuthorsHelper
-  # full_name(author.first_name, author.last_name)
-  def full_name(first_name, last_name)
-    "#{first_name} #{last_name}"
+  # author_name(author)
+  def author_name(author)
+    "#{author.first_name} #{author.last_name}"
+  end
+
+  def author_list(authors)
+    authors.map do |author|
+      "#{author_name(author)}"
+    end.to_sentence
   end
 end
