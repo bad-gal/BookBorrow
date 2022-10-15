@@ -35,7 +35,7 @@ puts "Create Books"
   Book.create(
     title: Faker::Book.title,
     publish_year: [1969, 1999, 2022, 1974, 2011, 2019, 2009, 2020, 1984, 1989].sample,
-    description: Faker::Lorem.paragraphs,
+    description: Faker::Lorem.paragraphs.to_sentence,
     user_id: User.all.sample.id,
     category_id: Category.all.sample.id
   )
