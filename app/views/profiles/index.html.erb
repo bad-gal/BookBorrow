@@ -1,0 +1,69 @@
+<h1><%= owner_name(current_user) %></h1>
+
+<h2 class="mb-8">Books you are sharing</h2>
+<table class="mb-12">
+  <thead>
+    <th>Cover</th>
+    <th>Title</th>
+    <th>Borrowed (times)</th>
+  </thead>
+  <tbody>
+    <% @books_owned.each do |book| %>
+    <tr>
+      <td>
+        <% if book.book_cover.attached? %>
+          <%= image_tag book.book_cover.variant(:thumb) %>
+        <% end %>
+      </td>
+      <td><%= book.title %></td>
+      <td><%= Loan.borrowed_count(book.id) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<hr>
+
+<h2 class="mb-8">Books you are currently borrowing</h2>
+
+  <table class="mb-12">
+    <thead>
+      <th>Cover</th>
+      <th>Title</th>
+      <th>Return by</th>
+    </thead>
+    <tbody>
+      <% @current_borrowed_books.each do |loan| %>
+        <tr>
+          <td>
+            <% if loan.book.book_cover.attached? %>
+              <%= image_tag loan.book.book_cover.variant(:thumb) %>
+            <% end %>
+          </td>
+          <td><%= loan.book.title %></td>
+          <td><%= loan.return_by.strftime("%a, %d %b %Y") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+<hr>
+<h2 class="mb-12">Borrowed books history</h2>
+  <table class="mb-12">
+    <thead>
+      <th>Cover</th>
+      <th>Title</th>
+    </thead>
+    <tbody>
+    <% @borrowed_books_history.each do |loan| %>
+    <tr>
+      <td>
+        <% if loan.book.book_cover.attached? %>
+          <%= image_tag loan.book.book_cover.variant(:thumb) %>
+        <% end %>
+      </td>
+      <td><%= loan.book.title %></td>
+    </tr>
+      <% end %>
+    </tbody>
+  </table>

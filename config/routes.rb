@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   resources :books do
     resources :loans
   end
+
+  get 'profile', to: 'profiles#index'
 end

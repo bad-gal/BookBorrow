@@ -9,4 +9,7 @@ class Loan < ApplicationRecord
   validates :status, presence: true
 
   scope :books_not_returned, -> { where(returned_on: nil).pluck(:book_id) }
+  scope :borrowed_count, ->(book_id) { where(book_id: book_id).count }
+  scope :outstanding, ->(user_id) { where(returned_on: nil).where(user_id: user_id) }
+  scope :history, ->(user_id) { where(user_id: user_id) }
 end
