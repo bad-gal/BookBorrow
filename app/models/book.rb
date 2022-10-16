@@ -16,4 +16,6 @@ class Book < ApplicationRecord
 
   scope :available, -> { where.not(id: Loan.books_not_returned) }
   scope :featured, ->(amount) { available.sample(amount) }
+  scope :owned, ->(user_id) { where(user_id: user_id) }
+  scope :not_owned, ->(user_id) { where.not(user_id: user_id) }
 end

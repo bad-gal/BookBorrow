@@ -34,5 +34,9 @@ en:
   book:
     create:
       success: 'Your book was added successfully.'
+  loan:
+    create:
+      success: "You borrowed this book successfully. Please return it by %{return_date}"
+      error: 'The book could not be borrowed'
   errors:
     book_not_found: 'The selected book could not be found'

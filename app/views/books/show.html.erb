@@ -21,9 +21,14 @@
     <p class="text-lg">Authors: <%= author_list(@book.authors) %></p>
   </div>
 
-  <% if current_user && @is_available %>
-    <div class="btn btn-primary"><%= button_to 'Borrow book', root_path %></div>
+  <% if current_user.present? && @book.user_id != current_user.id %>
+    <% if @is_available  %>
+      <div class="btn btn-primary"><%= button_to 'Borrow book', book_loans_path(params[:id], params: {loan: { book_id: params[:id], user_id: current_user.id, loan_date: Time.now.utc, return_by: 6.weeks.from_now, status: 'on loan'}}), method: 'post', data: { turbo: false } %></div>
+    <% end %>
+  <% elsif current_user.present? && @book.user_id == current_user.id %>
+    <div>You own this book</div>
   <% else %>
     <div><%= @is_available ? 'Book is AVAILABLE' : 'Book is currently unavailable'%></div>
   <% end %>
+  <div class="col-span-full mb-12"></div>
 </div>
