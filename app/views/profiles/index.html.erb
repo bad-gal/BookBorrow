@@ -20,7 +20,7 @@
       <td><%= Loan.borrowed_count(book.id) %></td>
       <td>
         <% unless Loan.find_by(book_id: book.id, status: 'on loan') %>
-          <%= button_to 'Remove Book', book_path(id: book.id), method: 'delete', data: { turbo: false }, class: "btn btn-primary" %>
+          <%= button_to 'Remove Book', book_path(id: book.id), method: 'delete', form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-primary" %>
         <% end %>
       </td>
     </tr>
