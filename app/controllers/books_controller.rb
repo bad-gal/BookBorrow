@@ -43,7 +43,16 @@ class BooksController < ApplicationController
     @is_available = Book.available.include?(@book)
   end
 
-  def destroy; end
+  def destroy
+    @book = Book.find(params[:id])
+    if @book.present?
+      @book.destroy
+      flash[:notice] = 'The book has been removed.'
+    else
+      flash[:notice] = 'The book does not exist'
+    end
+    redirect_to profile_path
+  end
 
   private
 

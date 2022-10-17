@@ -11,6 +11,12 @@ class LoansController < ApplicationController
     end
   end
 
+  def update
+    @loan = Loan.find(params[:id])
+    @loan.update!(loan_params)
+    redirect_to profile_path
+  end
+
   private
 
   def loan_params

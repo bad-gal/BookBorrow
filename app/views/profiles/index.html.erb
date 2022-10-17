@@ -1,4 +1,4 @@
-<h1><%= owner_name(current_user) %></h1>
+<h1 class="text-2xl mb-12">Profile: <%= owner_name(current_user) %></h1>
 
 <h2 class="mb-8">Books you are sharing</h2>
 <table class="mb-12">
@@ -6,17 +6,23 @@
     <th>Cover</th>
     <th>Title</th>
     <th>Borrowed (times)</th>
+    <th>Actions</th>
   </thead>
   <tbody>
     <% @books_owned.each do |book| %>
     <tr>
-      <td>
+      <td class="pb-4">
         <% if book.book_cover.attached? %>
           <%= image_tag book.book_cover.variant(:thumb) %>
         <% end %>
       </td>
       <td><%= book.title %></td>
       <td><%= Loan.borrowed_count(book.id) %></td>
+      <td>
+        <% unless Loan.find_by(book_id: book.id, status: 'on loan') %>
+          <%= button_to 'Remove Book', book_path(id: book.id), method: 'delete', data: { turbo: false }, class: "btn btn-primary" %>
+        <% end %>
+      </td>
     </tr>
     <% end %>
   </tbody>
@@ -30,6 +36,8 @@
       <th>Cover</th>
       <th>Title</th>
       <th>Return by</th>
+      <th>Action</th>
+      <th>Notes</th>
     </thead>
     <tbody>
       <% @current_borrowed_books.each do |loan| %>
@@ -41,6 +49,10 @@
           </td>
           <td><%= loan.book.title %></td>
           <td><%= loan.return_by.strftime("%a, %d %b %Y") %></td>
+          <td><%= button_to "Return book", book_loan_path(book_id: loan.book_id, id:loan.id, params:{ loan: { status: 'returned', returned_on: Time.now.utc }}), method: 'put', action: 'update', class: "btn btn-primary", data: { turbo: false } %></td>
+          <td class="font-bold text-red-400 italic">
+            <%= loan.status == 'overdue' ? 'This book is overdue, please return it now' : "" %>
+          </td>
         </tr>
       <% end %>
     </tbody>
@@ -67,3 +79,6 @@
       <% end %>
     </tbody>
   </table>
+<hr>
+<%= button_to 'Update Account',  edit_user_registration_path, data: { turbo: false }, method: 'get', class: "btn btn-secondary" %>
+<br>
