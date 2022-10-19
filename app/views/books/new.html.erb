@@ -2,7 +2,7 @@
 
 <h2 class="text-4xl font-bold md:mb-12 text-gray-500 text-center">Register your book</h2>
 
-<%= form_with model: @book, data: { controller: 'books', "turbo": 'false' } do |f| %>
+<%= form_with model: @book, data: { controller: 'books', turbo: false } do |f| %>
   <%= render "shared/error_messages", resource: @book %>
 
   <div class="grid grid-cols-6 gap-2">
