@@ -54,22 +54,21 @@
 
     <!--  author heading-->
     <div class="col-start-2 col-span-3 pt-6"><hr></div>
-    <div class="col-start-1 col-span-1">
-      <p class="font-bold text-lg text-gray-500 text-right">Author</p>
+    <div class="col-start-2 col-span-1">
+      <p class="font-bold text-lg text-gray-500">Author</p>
     </div>
+
+    <!--  add author button -->
+    <div class="col-start-4">
+      <button type="button" data-action="books#add" class="text-white font-bold p-2 mb-4 rounded-lg box-border border-blue-700 border bg-blue-400" >Add Author</button>
+    </div>
+
 
     <!--    author default row-->
     <div class="col-span-full">
       <%= f.fields_for :authors do |author_fields| %>
         <%= render "author_form", f: author_fields, hide_delete: true %>
       <% end %>
-    </div>
-
-    <div class="relative ">
-      <!--  add author button -->
-      <div class="absolute -bottom-full -mb-3 left-32">
-        <button type="button" data-action="books#add" class="text-white font-bold p-2 mb-4 rounded-lg box-border border-blue-700 border bg-blue-400" >Add Author</button>
-      </div>
     </div>
 
     <!--  insert authors here-->
