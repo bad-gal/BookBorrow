@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class LoansController < ApplicationController
   def create
     @loan = Loan.new(loan_params)
 
     if @loan.save
-      flash[:notice] = t('loan.create.success', return_date: @loan.return_by.strftime("%a, %d %b %Y"))
+      flash[:notice] = t('loan.create.success', return_date: @loan.return_by.strftime('%a, %d %b %Y'))
       redirect_to root_path
     else
       flash[:alert] = t('loan.create.error')

@@ -47,9 +47,9 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     if @book.present?
       @book.destroy
-      flash[:notice] = 'The book has been removed.'
+      flash[:notice] = t('book.destroy.success')
     else
-      flash[:notice] = 'The book does not exist'
+      flash[:notice] = t('book.destroy.error')
     end
     redirect_to profile_path
   end

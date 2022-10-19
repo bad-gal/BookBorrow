@@ -41,3 +41,9 @@ RSpec/ExampleLength:
 
 Style/Documentation:
   Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false

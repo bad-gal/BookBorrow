@@ -8,7 +8,7 @@ module AuthorsHelper
 
   def author_list(authors)
     authors.map do |author|
-      "#{author_name(author)}"
+      author_name(author).to_s
     end.to_sentence
   end
 end
