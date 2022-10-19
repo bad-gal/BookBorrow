@@ -13,7 +13,9 @@
     <tr>
       <td>
         <% if book.book_cover.attached? %>
-          <%= image_tag book.book_cover.variant(:thumb) %>
+          <%= link_to book_path(book.id) do %>
+            <%= image_tag book.book_cover.variant(:thumb) %>
+          <% end %>
         <% end %>
       </td>
       <td><%= link_to "#{book.title}", book_path(book.id) %></td>

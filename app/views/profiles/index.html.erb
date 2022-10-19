@@ -13,10 +13,12 @@
     <tr>
       <td class="pb-4">
         <% if book.book_cover.attached? %>
-          <%= image_tag book.book_cover.variant(:thumb) %>
+          <%= link_to book_path(book.id) do %>
+            <%= image_tag book.book_cover.variant(:thumb) %>
+          <% end %>
         <% end %>
       </td>
-      <td><%= book.title %></td>
+      <td><%= link_to "#{book.title}", book_path(book.id) %></td>
       <td><%= Loan.borrowed_count(book.id) %></td>
       <td>
         <% unless Loan.find_by(book_id: book.id, status: 'on loan') %>
@@ -44,10 +46,12 @@
         <tr>
           <td>
             <% if loan.book.book_cover.attached? %>
-              <%= image_tag loan.book.book_cover.variant(:thumb) %>
+              <%= link_to book_path(loan.book_id) do %>
+                <%= image_tag loan.book.book_cover.variant(:thumb) %>
+              <% end %>
             <% end %>
           </td>
-          <td><%= loan.book.title %></td>
+          <td><%= link_to "#{loan.book.title}", book_path(loan.book_id) %></td>
           <td><%= loan.return_by.strftime("%a, %d %b %Y") %></td>
           <td><%= button_to "Return book", book_loan_path(book_id: loan.book_id, id:loan.id, params:{ loan: { status: 'returned', returned_on: Time.now.utc }}), method: 'put', action: 'update', class: "btn btn-primary", data: { turbo: false } %></td>
           <td class="font-bold text-red-400 italic">
@@ -71,10 +75,12 @@
     <tr>
       <td>
         <% if loan.book.book_cover.attached? %>
-          <%= image_tag loan.book.book_cover.variant(:thumb) %>
+          <%= link_to book_path(loan.book_id) do %>
+            <%= image_tag loan.book.book_cover.variant(:thumb) %>
+          <% end %>
         <% end %>
       </td>
-      <td><%= loan.book.title %></td>
+      <td><%= link_to "#{loan.book.title}", book_path(loan.book_id) %></td>
     </tr>
       <% end %>
     </tbody>
