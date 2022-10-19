@@ -6,6 +6,7 @@
     <th>Cover</th>
     <th>Title</th>
     <th>Borrowed (times)</th>
+    <th>Borrowed by</th>
     <th>Actions</th>
   </thead>
   <tbody>
@@ -19,11 +20,19 @@
         <% end %>
       </td>
       <td><%= link_to "#{book.title}", book_path(book.id) %></td>
-      <td><%= Loan.borrowed_count(book.id) %></td>
+      <% if(Loan.borrowed_count(book.id)) > 0 %>
+        <td><%=Loan.borrowed_count(book.id) %></td>
+        <td><%= Loan.borrowed_users(book.id).to_sentence %></td>
+      <% else %>
+        <td>N/A</td>
+        <td>N/A</td>
+      <% end %>
       <td>
-        <% unless Loan.find_by(book_id: book.id, status: 'on loan') %>
+        <% if Loan.find_by(book_id: book.id, status: 'on loan') %>
+          Book is current on loan to: <%= owner_name(User.find(Loan.find_by(book_id: book.id, status: 'on loan').user_id)) %>
+        <% else %>
           <%= button_to 'Remove Book', book_path(id: book.id), method: 'delete', form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-primary" %>
-        <% end %>
+      <% end %>
       </td>
     </tr>
     <% end %>
