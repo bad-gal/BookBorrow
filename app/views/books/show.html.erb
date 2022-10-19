@@ -15,7 +15,7 @@
     <p class="text-lg">Category: <%= @book.category.topic %></p>
   </div>
   <div class="col-start-2 col-span-1">
-    <p class="text-lg">Book owner: <%= owner_name(@book.user) %></p>
+    <p class="text-lg">Book owner: <%= user_name(@book.user) %></p>
   </div>
   <div class="col-start-3 col-span-2">
     <p class="text-lg">Authors: <%= author_list(@book.authors) %></p>

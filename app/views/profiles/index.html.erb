@@ -1,4 +1,4 @@
-<h1 class="text-2xl mb-12">Profile: <%= owner_name(current_user) %></h1>
+<h1 class="text-2xl mb-12">Profile: <%= user_name(current_user) %></h1>
 
 <h2 class="mb-8">Books you are sharing</h2>
 <table class="mb-12">
@@ -29,7 +29,7 @@
       <% end %>
       <td>
         <% if Loan.find_by(book_id: book.id, status: 'on loan') %>
-          Book is current on loan to: <%= owner_name(User.find(Loan.find_by(book_id: book.id, status: 'on loan').user_id)) %>
+          Book is current on loan to: <%= user_name(User.find(Loan.find_by(book_id: book.id, status: 'on loan').user_id)) %>
         <% else %>
           <%= button_to 'Remove Book', book_path(id: book.id), method: 'delete', form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-primary" %>
       <% end %>

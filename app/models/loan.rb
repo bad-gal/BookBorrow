@@ -12,5 +12,5 @@ class Loan < ApplicationRecord
   scope :borrowed_count, ->(book_id) { where(book_id: book_id).count }
   scope :outstanding, ->(user_id) { where(returned_on: nil).where(user_id: user_id) }
   scope :history, ->(user_id) { where(user_id: user_id) }
-  scope :borrowed_users, -> (book_id) { where(book_id: book_id).pluck(:user_id).uniq.map{ |id| ApplicationController.helpers.owner_name(User.find(id)) } }
+  scope :borrowed_users, -> (book_id) { where(book_id: book_id).pluck(:user_id).uniq.map{ |id| ApplicationController.helpers.user_name(User.find(id)) } }
 end
