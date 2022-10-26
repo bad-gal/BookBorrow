@@ -53,8 +53,10 @@
 
 <hr class="my-4">
 <h3 class="text-2xl text-red-600 my-6">Cancel my account</h3>
-<p class="text-red-700 mb-4">Please make sure that you have removed any books that you own and return any books that you borrowed BEFORE you cancel your account</p>
-<%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-error mb-4" %>
-
+<% if Loan.outstanding(current_user.id) == 0 && Book.owned(user.id).pluck(:id).map{ |book_id| Loan.find_by(book_id: book_id, status: 'on loan') }.count == 0 %>
+  <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-error mb-4" %>
+<% else %>
+  <p class="text-red-700 mb-4">You can not cancel your account at the moment because you either have borrowed books that you have not returned, or you still have registered books on loan. Check the <%= link_to "profile page", profile_path, class: "text-blue-500 underline" %> for details</p>
+<% end %>
 <%= link_to "Back", :back %>
 <div class="mb-12"></div>
