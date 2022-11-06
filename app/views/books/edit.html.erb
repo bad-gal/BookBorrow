@@ -1,0 +1,104 @@
+<div class="container m-6">
+  <h2 class="text-4xl font-bold md:mb-12 text-gray-500 text-center"><%=@book.title %></h2>
+
+  <%= form_with model: @book, data: { controller: 'books', turbo: false } do |f| %>
+    <%= render "shared/error_messages", resource: @book %>
+
+    <div class="grid grid-cols-6 gap-2">
+      <!--  title -->
+      <div class="col-start-2 col-span-1">
+        <%= f.label :title, class: "block text-gray-500 font-bold" %>
+      </div>
+      <div class="col-start-2 col-span-3">
+        <%= f.text_field :title, class: "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"%>
+      </div>
+      <!--  description -->
+      <div class="col-start-2 col-span-1">
+        <%= f.label :description, class: "block text-gray-500 font-bold" %>
+      </div>
+      <div class="col-start-2 col-span-3">
+        <%= f.text_area :description, size: "30x5", class: "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"%>
+      </div>
+      <!--  publish date label-->
+      <div class="col-start-2 col-span-1">
+        <%= f.label :publish_year, class: "block text-gray-500 font-bold" %>
+      </div>
+      <!--  category label -->
+      <div class="col-start-3 col-span-4">
+        <%= f.label 'Category', class: "block text-gray-500 font-bold" %>
+      </div>
+      <!--  publish date field -->
+      <div class="col-start-2 col-span-1">
+        <%= f.select :publish_year,
+                     (Time.zone.now.year - 60)..(Time.zone.now.year),
+                     { prompt: "Select year" },
+                     {class: "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"} %>
+      </div>
+      <!--  category field -->
+      <div class="col-start-3 col-span-1">
+        <%= f.collection_select :category_id,
+                                Category.order(:topic),
+                                :id,
+                                :topic,
+                                {},
+                                { class: "block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
+      </div>
+      <!-- book cover image -->
+      <div class="col-start-2 col-span-2">
+        <%= f.label 'Upload book cover', class:"block text-gray-500 font-bold" %>
+      </div>
+      <div class="col-start-2 col-span-2">
+        <%= f.file_field :book_cover, accept: 'image/png,image/gif,image/jpeg' %>
+      </div>
+      <div class="col-start-4 col-span-1">
+        <% if @book.book_cover.attached? %>
+          <p class="text-sm">current book image</p>
+          <p class="text-sm">(before update)</p>
+          <div class="avatar">
+            <div class="mask mask-squircle w-24 h-24">
+              <%= image_tag @book.book_cover.variant(:thumb) %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <!--  author heading-->
+      <div class="col-start-2 col-span-3 pt-6"><hr></div>
+      <div class="col-start-2 col-span-1">
+        <p class="font-bold text-lg text-gray-500">Author</p>
+      </div>
+
+      <!--  add author button -->
+      <div class="col-start-4">
+        <button type="button" data-action="books#update" class="text-white font-bold p-2 mb-4 rounded-lg box-border border-blue-700 border bg-blue-400" >Add Author</button>
+      </div>
+
+      <!--    author default row-->
+      <div class="col-span-full">
+        <%= f.fields_for :authors do |author_fields| %>
+          <div class="col-span-full">
+          <%= render "author_form", f: author_fields, hide_delete: true %>
+          </div>
+        <% end %>
+        <!--  insert authors here-->
+        <div data-books-target="authorList"></div>
+
+        <!-- authors  grid-cols-none-->
+        <template data-books-target="template">
+          <%= f.fields_for :authors, Author.new, child_index: 'NEW_RECORD' do |author_fields| %>
+            <%= render "author_form", f: author_fields, hide_delete: false %>
+          <% end %>
+        </template>
+      </div>
+    </div>
+
+    <!-- add book button-->
+    <div class="md:flex md:items-center mb-24">
+      <div class="md:w-1/3"></div>
+      <div class="md:w-2/3">
+        <%= f.submit 'Update book', class:"shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
+      </div>
+    </div>
+
+  <% end %>
+</div>

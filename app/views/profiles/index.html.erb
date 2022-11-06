@@ -10,6 +10,7 @@
       <th>Borrowed (times)</th>
       <th>Borrowed by</th>
       <th>Info/Actions</th>
+      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -50,6 +51,9 @@
           <% else %>
             <%= button_to 'Remove Book', book_path(id: book.id), method: 'delete', form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-primary" %>
           <% end %>
+        </td>
+        <td>
+          <%= button_to 'Edit Book', edit_book_path(book.id), method: 'get', data: { turbo: false }, class: "btn btn-accent" %>
         </td>
       </tr>
     <% end %>
@@ -150,5 +154,5 @@
   </table>
 </div>
 <hr class="my-4">
-<%= button_to 'Update Account',  edit_user_registration_path, data: { turbo: false }, method: 'get', class: "btn btn-secondary" %>
+<%= button_to 'Update Account',  edit_user_registration_path, data: { turbo: false }, method: 'get', class: "btn btn-warning" %>
 <br>

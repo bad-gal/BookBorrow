@@ -34,6 +34,8 @@ en:
   book:
     create:
       success: 'Your book was added successfully.'
+    update:
+      success: 'Your book was updated successfully.'
     destroy:
       success: 'The book has been removed.'
       error: 'The book does not exist'

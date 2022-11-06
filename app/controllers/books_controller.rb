@@ -34,9 +34,19 @@ class BooksController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @book = Book.find(params[:id])
+  end
 
-  def update; end
+  def update
+    @book = Book.find(params[:id])
+    if @book.update(book_params)
+      flash[:notice] = t('book.update.success')
+      redirect_to book_path(@book)
+    else
+      render 'edit'
+    end
+  end
 
   def show
     @book = Book.find(params[:id])
